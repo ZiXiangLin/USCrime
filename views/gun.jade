@@ -1,0 +1,599 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title 美国枪支流通情况
+    link(rel='stylesheet', href='../stylesheets/leaflet.css')
+    style.
+      html, body, #map {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      }
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(href='../../../../favicon.ico', rel='icon')
+    title #{title}
+    script(type='text/javascript',src='/javascripts/jquery.js')
+    script(src='/javascripts/echarts.js', type='text/javascript')
+    // Bootstrap core CSS
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    script(src='/javascripts/jquery.min.js')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/ecStat.js')
+    // script(src="/javascripts/list.js")
+    // Custom styles for this template
+    // link(href='dashboard.css', rel='stylesheet')
+    style(type='text/css').
+        /* Chart.js */
+        @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}
+    
+    // Le styles
+    link(href='/javascript/bootstrap.css', rel='stylesheet')
+    style(type='text/css').
+      #mapid { height: 90%; width:100%}
+      body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+      }
+      .sidebar-nav {
+      padding: 9px 0;
+      }
+      @media (max-width: 980px) {
+      /* Enable use of floated navbar text */
+      .navbar-text.pull-right {
+      float: none;
+      padding-left: 5px;
+      padding-right: 5px;
+      }
+      }
+      @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}
+    link(href='../assets/css/bootstrap-responsive.css', rel='stylesheet')
+    // HTML5 shim, for IE6-8 support of HTML5 elements
+    //if lt IE 9
+      script(src='../assets/js/html5shiv.js')
+    // 
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='Bootstrap是Twitter推出的一个用于前端开发的开源工具包。它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。目前，Bootstrap最新版本为3.0 。Bootstrap中文网致力于为广大国内开发者提供详尽的中文文档、代码实例等，助力开发者掌握并使用这一框架。')
+    meta(name='keywords', content='Bootstrap,CSS,CSS框架,CSS framework,javascript,bootcss,bootstrap开发,bootstrap代码,bootstrap入门')
+    meta(name='author', content='Bootstrap中文网')
+    meta(name='robots', content='index,follow')
+    meta(name='application-name', content='bootcss.com')
+    meta(content='1603466166416277433363757477167', property='qc:admins')
+    // Site CSS
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', rel='stylesheet')
+    link(href='https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', rel='stylesheet')
+    link(href='/assets/css/site.min.css?1539973179973', rel='stylesheet')
+    style.
+      .job-hot {
+      position: absolute;
+      color: #d9534f;
+      right: 0;
+      top: 15px;
+      }
+    // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src='https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js')
+      script(src='https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js')
+    // Favicons
+    link(href='https://assets.bootcss.com/www/assets/ico/apple-touch-icon-precomposed.png?1539973179973', rel='apple-touch-icon-precomposed')
+    link(href='https://assets.bootcss.com/www/assets/ico/favicon.png?1539973179973', rel='shortcut icon')
+    script.
+      var _hmt = _hmt || [];
+    link(href='http://www.bootcss.com/', rel='canonical')
+    script.
+      var qqgroup = '318630708';
+    // 后续修改为本地文件引用
+    link(href='https://unpkg.com/leaflet@1.3.4/dist/leaflet.css', rel='stylesheet', integrity='sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==', crossorigin='')
+    // Make sure you put this AFTER Leaflet's CSS
+    script(src='https://unpkg.com/leaflet@1.3.4/dist/leaflet.js', crossorigin='', integrity='sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==')
+    // Fav and touch icons
+    link(href='../assets/ico/apple-touch-icon-144-precomposed.png', rel='apple-touch-icon-precomposed', sizes='144x144')
+    link(href='../assets/ico/apple-touch-icon-114-precomposed.png', rel='apple-touch-icon-precomposed', sizes='114x114')
+    link(href='../assets/ico/apple-touch-icon-72-precomposed.png', rel='apple-touch-icon-precomposed', sizes='72x72')
+    link(href='../assets/ico/apple-touch-icon-57-precomposed.png', rel='apple-touch-icon-precomposed')
+    link(href='../assets/ico/favicon.png', rel='shortcut icon')
+    // head new 2018.11.3
+    script#twitter-wjs(src='https://platform.twitter.com/widgets.js')
+    script(src='https://consent.cookiebot.com/a28b71f3-4d2e-4eac-93bc-34929948dd7d/cc.js?renew=false&referer=circleci.com&dnt=false&forceshow=false&cbid=a28b71f3-4d2e-4eac-93bc-34929948dd7d&whitelabel=false&brandid=Cookiebot', type='text/javascript', charset='UTF-8', async='')
+    script(type='text/javascript').
+      window.thirdPartyIds = {
+      quantcast: "p-amMve9wcqXH81"
+      };
+    script#Cookiebot(src='https://consent.cookiebot.com/uc.js', type='text/javascript', async='', data-cbid='a28b71f3-4d2e-4eac-93bc-34929948dd7d')
+    script(src='https://cdn.optimizely.com/js/8188917468.js', type='text/plain', data-cookieconsent='statistics')
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    link(title='Latest 10 blog posts (atom)', href='/blog/feed.xml', rel='alternate', type='application/rss+xml')
+    link(href='https://d3r49iyjzglexf.cloudfront.net/favicon-066b37ff00f0f968b903c13ae88b5573b62665aea8fbe91bb61c55dfa9446523.ico', rel='icon', type='image/png')
+    // adding canonical links, if they are specified in front matter /
+    link(href='../assets/css/vender1.css', rel='stylesheet', type='text/css')
+    link(href='../assets/css/vender_lity.css', rel='stylesheet', type='text/css')
+    link(href='https://d3r49iyjzglexf.cloudfront.net/site-e1e90682e27ce8d36ecfc129588eb129f5a3b3024b51d828e844b17bc1994b01.css', rel='stylesheet', type='text/css')
+    script.
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.1.0";
+      var categoryOverride = "home" || null;
+      var nameOverride     = null;
+      var pageUrlParts = "/".split('/').slice(1, -1);
+      // store as globals to read off of it later in analytics.js
+      window.analyticsPageProperties = {
+      categoryOverride: categoryOverride,
+      nameOverride: nameOverride,
+      pageUrlParts: pageUrlParts,
+      };
+      }}();
+    style#CookieConsentStateDisplayStyles(type='text/css').
+      .cookieconsent-optin-preferences,.cookieconsent-optin-statistics,.cookieconsent-optin-marketing,.cookieconsent-optin{display:none;}.cookieconsent-optout-preferences,.cookieconsent-optout-statistics,.cookieconsent-optout-marketing,.cookieconsent-optout{display:block;display:initial;}
+    script(type='text/plain', data-cookieconsent='statistics').
+      analytics.load("AbgkrgN4cbRhAVEwlzMkHbwvrXnxHh35");
+    // Begin Jekyll SEO tag v2.0.0
+    meta(content='Continuous Integration and Delivery', property='og:title')
+    meta(name='description', content='CircleCI’s continuous integration and delivery platform makes it easy for teams of all sizes to rapidly build and release quality software at scale.  Build for Linux, macOS, and Android, in the cloud or behind your firewall.')
+    meta(content='CircleCI’s continuous integration and delivery platform makes it easy for teams of all sizes to rapidly build and release quality software at scale.  Build for Linux, macOS, and Android, in the cloud or behind your firewall.', property='og:description')
+    link(href='https://circleci.com/', rel='canonical')
+    meta(content='https://circleci.com/', property='og:url')
+    meta(content='CircleCI', property='og:site_name')
+    meta(content='https://circleci.com/circleci-logo-horizontal-twitter.png', property='og:image')
+    meta(name='twitter:card', content='summary_large_image')
+    meta(name='twitter:site', content='@circleci')
+    script(type='application/ld+json').
+      {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": "CircleCI",
+      "headline": "Continuous Integration and Delivery",
+      "image": "https://circleci.com/circleci-logo-horizontal-twitter.png",
+      "description": "CircleCI’s continuous integration and delivery platform makes it easy for teams of all sizes to rapidly build and release quality software at scale.  Build for Linux, macOS, and Android, in the cloud or behind your firewall.",
+      "logo": "https://circleci.com/circleci-logo-stacked-fb.png",
+      "sameAs": ["https://www.facebook.com/circleci","https://twitter.com/circleci","https://github.com/circleci","https://www.linkedin.com/company/circleci"],
+      "url": "https://circleci.com/"
+      }
+  body
+    nav.nav-toggle.two
+      .container
+        .row
+          .col-md-12
+            .widescreen
+              a(href='/', data-analytics='top-nav-logo')
+                img.logo(alt='Home', src='../img/logo.jpg ')
+              ul.left-links.main-nav
+                li.nav-item
+                  a(href='/pages/charts', data-analytics='top-nav-product') 可视化展示
+                  .submenu
+                    ul.subnav(data-analytics='topnav-product-clicked')
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/charts') 总览
+                      li.subnav-item(data-analytics='top-nav-product-how-it-works')
+                        a(href='/users/scatter') 全美暴力犯罪情况
+                      li.subnav-item(data-analytics='top-nav-product-features')
+                        a(href='/users/pie') 犯罪率与GDP的关系
+                      li.subnav-item(data-analytics='top-nav-product-build-environments')
+                        a(href='/users/usa') 谋杀案件数量与武器持有的关系
+                      li.subnav-item(data-analytics='top-nav-product-hosting-options')
+                        a(href='/users/bar') 城市犯罪率
+                      // <li class="subnav-item" data-analytics="top-nav-product-integrations"><a href="/integrations/">Integrations</a></li>
+                li.nav-item
+                 
+                li.nav-item
+                  a(href='/pages/analysis', data-analytics='top-nav-product')| GIS分析
+                  .submenu
+                    ul.subnav(data-analytics='topnav-product-clicked')
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/usanew') 警力分布预测
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/usanew2') 2017年暴力事件犯罪率
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/molan') 局部莫兰指数与批捕率的关系
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/ae') arcengine操作实录
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/youtube') 三维视频播放
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/SDcities') 最危险与最安全的五个州
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/Gun') 全美武器流通图
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/Heat') 全美热力图
+                  .submenu
+                li.nav-item(data-analytics='top-nav-pricing')
+                  a(href='/pages/OurTeam') 我们的团队
+              ul.right-links.main-nav(style='display: block;')
+                li.default-item.nav-item
+                  a(href='direction.html', data-analytics='top-nav-contact-us') 网站说明
+                li.divider-left.nav-item.visitor-item
+                  a(href='/users/login', data-analytics='top-nav-login', data-hj-masked='') 登录
+                li.nav-item.visitor-item
+                  a.btn-primary.small(href='/users/reg', data-analytics='top-nav-signup', data-analytics-action='signup-clicked', data-analytics-location='nav', data-optimizely='signup_button_clicked')
+                    | 注册
+                li.dashboard-link.desktop-nav.divider-left
+                  a(href='/dashboard', data-analytics='top-nav-go-to-app') Go to app
+            .narrowscreen
+              button.navbar-toggle.collapsed(aria-expanded='false', aria-controls='#mobile-navigation', type='button', data-target='#mobile-navigation', data-toggle='collapse')
+                span.sr-only Toggle navigation
+                span.icon-bar.top-bar
+                span.icon-bar.middle-bar
+                span.icon-bar.bottom-bar
+              a(href='/', data-analytics='top-nav-logo')
+                img.logo(alt='CircleCI Home', src='../img/logo.jpg')
+              span.login
+                a.mobile-nav.signup.visitor-item(href='users/login', data-analytics='top-nav-login', data-hj-masked='', data-analytics-location='nav') 登录
+                a.dashboard-link.mobile-nav(href='/dashboard', data-analytics='top-nav-go-to-app') Go to app
+              ul#mobile-navigation.dropdown-menu2
+                li
+                  a.btn-primary(href='users/reg', data-analytics='top-nav-signup', data-analytics-action='signup-clicked', data-optimizely='signup_button_clicked') 注册
+                li.arrow.collapsed.border-bottom
+                  span.heading(data-analytics='top-nav-product')
+                    i.fa.fa-angle-right(aria-hidden='true')
+                    |                 可视化展示
+                  ul.subnav
+                    li.subnav-item(data-analytics='top-nav-product-overview')
+                      a(href='/pages/charts') 总览
+                    li.subnav-item(data-analytics='top-nav-product-how-it-works')
+                      a(href='/users/scatter') 全美暴力犯罪情况
+                    li.subnav-item(data-analytics='top-nav-product-features')
+                      a(href='/users/pie') 犯罪类型统计
+                    li.subnav-item(data-analytics='top-nav-product-build-environments')
+                      a(href='/users/usa') 谋杀案件数量与武器持有的关系
+                    li.subnav-item(data-analytics='top-nav-product-hosting-options')
+                      a(href='/users/bar') 城市犯罪率
+                    // <li class="subnav-item" data-analytics="top-nav-developer-integrations"><a href="/integrations/">Integrations</a></li>
+                li.arrow.collapsed.border-bottom
+                  span.heading
+                    i.fa.fa-angle-right(aria-hidden='true')
+                    |                 GIS分析
+                li.border-bottom(data-analytics='top-nav-pricing')
+                  a(href='/pages/OurTeam') 我们的团队
+    #map
+    script(src='../javascripts/main.min.js')
+    script.
+      var map = L.map('map');
+      var baseLayers = {
+      "高德地图": L.tileLayer('http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+      subdomains: "1234"
+      }),
+      '高德影像': L.layerGroup([L.tileLayer('http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
+      subdomains: "1234"
+      }), L.tileLayer('http://t{s}.tianditu.cn/DataServer?T=cta_w&X={x}&Y={y}&L={z}', {
+      subdomains: "1234"
+      })]),
+      "立体地图": L.tileLayer('https://a.tiles.mapbox.com/v3/examples.c7d2024a/{z}/{x}/{y}.png', {
+      attribution: 'Map &copy; Pacific Rim Coordination Center (PRCC).  Certain data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+      key: 'BC9A493B41014CAABB98F0471D759707',
+      styleId: 22677
+      }),
+      "Foursquare": L.tileLayer('https://a.tiles.mapbox.com/v3/foursquare.map-0y1jh28j/{z}/{x}/{y}.png', {
+      attribution: 'Map &copy; Pacific Rim Coordination Center (PRCC).  Certain data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+      key: 'BC9A493B41014CAABB98F0471D759707',
+      styleId: 22677
+      }),
+      'GeoQ灰色底图': L.tileLayer('http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}').addTo(map)
+      };
+      L.tileLayer('https://a.tiles.mapbox.com/v3/foursquare.map-0y1jh28j/{z}/{x}/{y}.png', {
+      attribution: 'Map &copy; Pacific Rim Coordination Center (PRCC).  Certain data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+      key: 'BC9A493B41014CAABB98F0471D759707',
+      styleId: 22677
+      });
+      var layercontrol = L.control.layers(baseLayers,{}, {
+      position: "topleft"
+      }).addTo(map);
+      /*map.setView(L.latLng(37.550339, 104.114129), 4);*/
+      map.setView(L.latLng(37.550339, -90.114129), 4);
+      var overlay = new L.echartsLayer3(map, echarts);
+      var chartsContainer = overlay.getEchartsContainer();
+      var myChart = overlay.initECharts(chartsContainer);
+      var geoCoordMap = {
+      'ALABAMA':[-86.79972,33.52222],
+      'ALASKA':[-149.88722,61.21667],
+      'ARIZONA':[-112.07500,33.44861],
+      'ARKANSAS':[-92.33111,34.73611],
+      'CALIFORNIA':[-118.24361,34.05222],
+      'COLORADO':[-104.98472,39.73917],
+      'CONNECTICUT':[-73.19556,41.18639],
+      'DELAWARE':[-75.54667,39.74583],
+      'FLORIDA':[-80.22639,25.78889],
+      'GEORGIA':[-84.39000,33.74722],
+      'HAWAII':[-157.85944,21.30694],
+      'IDAHO':[-116.23778,43.61361],
+      'ILLINOIS':[-87.62778,41.87778 ],
+      'INDIANA':[-86.14806,39.79111],
+      'IOWA':[-93.62083,41.59083],
+      'KANSAS':[-97.33611,37.68889],
+      'KENTUCKY':[-85.76667,38.25000],
+      'LOUISIANA':[-90.05000,29.96667],
+      'MAINE':[-70.26667,43.66667],
+      'MARYLAND':[-76.61667,39.28333],
+      'MASSACHUSETTS':[-71.05972,42.35806],
+      'MICHIGAN':[-83.04583,42.33139],
+      'MINNESOTA':[-93.26667,44.98333],
+      'MISSISSIPPI':[-89.18611,31.05639],
+      'MISSOURI':[-90.19833,38.62750],
+      'MONTANA':[-108.53722,45.78667],
+      'NEBRASKA':[-96.00000,41.25000],
+      'NEVADA':[-115.17361,36.11389],
+      'NEW HAMPSHIRE':[-71.45444,42.99583],
+      'NEW JERSEY':[-74.17250,40.72417],
+      'NEW MEXICO':[-106.61000,35.11083 ],
+      'NEW YORK':[-74.00000,40.71250],
+      'NORTH CAROLINA':[-80.84389,35.22778],
+      'NORTH DAKOTA':[-96.78944,46.87722],
+      'OHIO':[-84.51667,39.10000],
+      'OKLAHOMA':[-97.53500,35.48222 ],
+      'OREGON':[-122.68194,45.52000],
+      'PENNSYLVANIA':[-75.17000,39.95000],
+      'RHODE ISLAND':[-71.42222,41.82361],
+      'SOUTH CAROLINA':[-81.03417,34.00111],
+      'SOUTH DAKOTA':[-96.70000,43.55056],
+      'TENNESSEE':[-86.78333,36.16667 ],
+      'TEXAS':[-96.80167,32.77972 ],
+      'UTAH':[-111.89111,40.76139 ],
+      'VERMONT':[-73.21194,44.47583 ],
+      'VIRGINIA':[-76.28556,36.85111],
+      'WASHINGTON':[-122.33222,47.60583],
+      'WEST VIRGINIA':[-81.63333,38.34722],
+      'WISCONSIN':[-87.95000,43.05000],
+      'WYOMING':[-104.80194,41.14556],
+      };
+      var CALIFORNIA_Data = [
+      [{name: 'CALIFORNIA'}, {name: 'ARIZONA', value: 163}],
+      [{name: 'CALIFORNIA'}, {name: 'COLORADO', value: 57}],
+      [{name: 'CALIFORNIA'}, {name: 'FLORIDA', value: 90}],
+      [{name: 'CALIFORNIA'}, {name: 'ILLINOIS', value: 63}],
+      [{name: 'CALIFORNIA'}, {name: 'NEVADA', value: 319}],
+      [{name: 'CALIFORNIA'}, {name: 'NEW YORK', value: 64}],
+      [{name: 'CALIFORNIA'}, {name: 'NORTH CAROLINA', value: 58}],
+      [{name: 'CALIFORNIA'}, {name: 'OREGON', value: 149}],
+      [{name: 'CALIFORNIA'}, {name: 'TEXAS', value: 169}],
+      [{name: 'CALIFORNIA'}, {name: 'WASHINGTON', value: 104}]
+      ];
+      var FLORIDA_Data = [
+      [{name: 'FLORIDA'}, {name: 'CALIFORNIA', value: 270}],
+      [{name: 'FLORIDA'}, {name: 'VIRGINIA', value: 123}],
+      [{name: 'FLORIDA'}, {name: 'GEORGIA', value: 416}],
+      [{name: 'FLORIDA'}, {name: 'ILLINOIS', value: 124}],
+      [{name: 'FLORIDA'}, {name: 'NEW JERSEY', value: 153}],
+      [{name: 'FLORIDA'}, {name: 'NEW YORK', value: 485}],
+      [{name: 'FLORIDA'}, {name: 'NORTH CAROLINA', value: 249}],
+      [{name: 'FLORIDA'}, {name: 'PENNSYLVANIA', value: 128}],
+      [{name: 'FLORIDA'}, {name: 'TENNESSEE', value: 132}],
+      [{name: 'FLORIDA'}, {name: 'TEXAS', value: 182}]
+      ];
+      var GEORGIA_Data = [
+      [{name: 'GEORGIA'}, {name: 'ALABAMA', value: 240}],
+      [{name: 'GEORGIA'}, {name: 'CALIFORNIA', value: 286}],
+      [{name: 'GEORGIA'}, {name: 'FLORIDA', value: 685}],
+      [{name: 'GEORGIA'}, {name: 'ILLINOIS', value: 200}],
+      [{name: 'GEORGIA'}, {name: 'MARYLAND', value: 230}],
+      [{name: 'GEORGIA'}, {name: 'NEW JERSEY', value: 262}],
+      [{name: 'GEORGIA'}, {name: 'NEW YORK', value: 558}],
+      [{name: 'GEORGIA'}, {name: 'NORTH CAROLINA', value: 308}],
+      [{name: 'GEORGIA'}, {name: 'SOUTH CAROLINA', value: 285}],
+      [{name: 'GEORGIA'}, {name: 'TENNESSEE', value: 401}]
+      ];
+      var INDIANA_Data=[
+      [{name: 'INDIANA'}, {name: 'CALIFORNIA', value: 113}],
+      [{name: 'INDIANA'}, {name: 'FLORIDA', value: 101}],
+      [{name: 'INDIANA'}, {name: 'ILLINOIS', value: 1623}],
+      [{name: 'INDIANA'}, {name: 'NORTH CAROLINA', value: 42}],
+      [{name: 'INDIANA'}, {name: 'KENTUCKY', value: 302}],
+      [{name: 'INDIANA'}, {name: 'MICHIGAN', value: 85}],
+      [{name: 'INDIANA'}, {name: 'OHIO', value: 161}],
+      [{name: 'INDIANA'}, {name: 'TENNESSEE', value: 70}],
+      [{name: 'INDIANA'}, {name: 'TEXAS', value: 60}],
+      [{name: 'INDIANA'}, {name: 'WISCONSIN', value: 52}]
+      ];
+      var LOUISIANA_Data=[
+      [{name: 'LOUISIANA'}, {name: 'ALABAMA', value: 36}],
+      [{name: 'LOUISIANA'}, {name: 'CALIFORNIA', value: 168}],
+      [{name: 'LOUISIANA'}, {name: 'COLORADO', value: 41}],
+      [{name: 'LOUISIANA'}, {name: 'FLORIDA', value: 105}],
+      [{name: 'LOUISIANA'}, {name: 'GEORGIA', value: 70}],
+      [{name: 'LOUISIANA'}, {name: 'ILLINOIS', value: 50}],
+      [{name: 'LOUISIANA'}, {name: 'MISSISSIPPI', value: 146}],
+      [{name: 'LOUISIANA'}, {name: 'NORTH CAROLINA', value: 47}],
+      [{name: 'LOUISIANA'}, {name: 'TENNESSEE', value: 48}],
+      [{name: 'LOUISIANA'}, {name: 'TEXAS', value: 522}]
+      ];
+      var NORTHCAROLINA_Data=[
+      [{name: 'NORTH CAROLINA'}, {name: 'CALIFORNIA', value: 163}],
+      [{name: 'NORTH CAROLINA'}, {name: 'FLORIDA', value: 176}],
+      [{name: 'NORTH CAROLINA'}, {name: 'GEORGIA', value: 159}],
+      [{name: 'NORTH CAROLINA'}, {name: 'MARYLAND', value: 215}],
+      [{name: 'NORTH CAROLINA'}, {name: 'NEW JERSEY', value: 239}],
+      [{name: 'NORTH CAROLINA'}, {name: 'NEW YORK', value: 377}],
+      [{name: 'NORTH CAROLINA'}, {name: 'PENNSYLVANIA', value: 101}],
+      [{name: 'NORTH CAROLINA'}, {name: 'SOUTH CAROLINA', value: 315}],
+      [{name: 'NORTH CAROLINA'}, {name: 'TEXAS', value: 72}],
+      [{name: 'NORTH CAROLINA'}, {name: 'VIRGINIA', value: 193}]
+      ];
+      var OHIO_Data=[
+      [{name: 'OHIO'}, {name: 'CALIFORNIA', value: 134}],
+      [{name: 'OHIO'}, {name: 'FLORIDA', value: 129}],
+      [{name: 'OHIO'}, {name: 'ILLINOIS', value: 223}],
+      [{name: 'OHIO'}, {name: 'INDIANA', value: 150}],
+      [{name: 'OHIO'}, {name: 'KENTUCKY', value: 123}],
+      [{name: 'OHIO'}, {name: 'MICHIGAN', value: 189}],
+      [{name: 'OHIO'}, {name: 'NEW YORK', value: 271}],
+      [{name: 'OHIO'}, {name: 'NORTH CAROLINA', value: 104}],
+      [{name: 'OHIO'}, {name: 'PENNSYLVANIA', value: 163}],
+      [{name: 'OHIO'}, {name: 'TEXAS', value: 85}]
+      ];
+      var PENNSYLVANIA_Data=[
+      [{name: 'PENNSYLVANIA'}, {name: 'CALIFORNIA', value: 90}],
+      [{name: 'PENNSYLVANIA'}, {name: 'DELAWARE', value: 89}],
+      [{name: 'PENNSYLVANIA'}, {name: 'FLORIDA', value: 142}],
+      [{name: 'PENNSYLVANIA'}, {name: 'MARYLAND', value: 383}],
+      [{name: 'PENNSYLVANIA'}, {name: 'NEW JERSEY', value: 389}],
+      [{name: 'PENNSYLVANIA'}, {name: 'NEW YORK', value: 451}],
+      [{name: 'PENNSYLVANIA'}, {name: 'NORTH CAROLINA', value: 112}],
+      [{name: 'PENNSYLVANIA'}, {name: 'OHIO', value: 137}],
+      [{name: 'PENNSYLVANIA'}, {name: 'TEXAS', value: 49}],
+      [{name: 'PENNSYLVANIA'}, {name: 'VIRGINIA', value: 72}]
+      ];
+      var TEXAS_Data=[
+      [{name: 'TEXAS'}, {name: 'ARIZONA', value: 129}],
+      [{name: 'TEXAS'}, {name: 'CALIFORNIA', value: 764}],
+      [{name: 'TEXAS'}, {name: 'COLORADO', value: 156}],
+      [{name: 'TEXAS'}, {name: 'FLORIDA', value: 209}],
+      [{name: 'TEXAS'}, {name: 'GEORGIA', value: 118}],
+      [{name: 'TEXAS'}, {name: 'ILLINOIS', value: 175}],
+      [{name: 'TEXAS'}, {name: 'LOUISIANA', value: 479}],
+      [{name: 'TEXAS'}, {name: 'NEW MEXICO', value: 120}],
+      [{name: 'TEXAS'}, {name: 'NORTH CAROLINA', value: 116}],
+      [{name: 'TEXAS'}, {name: 'TENNESSEE', value: 122}]
+      ];
+      var VIRGINIA_Data=[
+      [{name: 'VIRGINIA'}, {name: 'CALIFORNIA', value: 121}],
+      [{name: 'VIRGINIA'}, {name: 'FLORIDA', value: 147}],
+      [{name: 'VIRGINIA'}, {name: 'GEORGIA', value: 96}],
+      [{name: 'VIRGINIA'}, {name: 'MARYLAND', value: 858}],
+      [{name: 'VIRGINIA'}, {name: 'NEW JERSEY', value: 269}],
+      [{name: 'VIRGINIA'}, {name: 'NEW YORK', value: 426}],
+      [{name: 'VIRGINIA'}, {name: 'NORTH CAROLINA', value: 469}],
+      [{name: 'VIRGINIA'}, {name: 'PENNSYLVANIA', value: 160}],
+      [{name: 'VIRGINIA'}, {name: 'TENNESSEE', value: 63}],
+      [{name: 'VIRGINIA'}, {name: 'TEXAS', value: 83}]
+      ];
+      /*
+      var planePath = 'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z';*/
+      var planePath = 'path://m454.332031 0-40.417969 41.609375-21.054687-21.054687-159.066406 159.0625-29.902344-29.902344-152.699219 101.804687 55.351563 55.351563-106.042969 106.042968 99.085938 99.085938 74.230468-137.855469 4.019532 4.019531 24.128906 96.515626 92.164062-30.722657-22.515625-90.066406 15.203125-15.207031 42.417969 42.417968 63.625-63.625-84.832031-84.835937 21.207031-21.207031 23.539063 23.539062 101.800781-152.703125-19.449219-19.449219 40.722656-41.921874zm-254.261719 188.3125 12.515626 12.515625-84.835938 84.832031-29.480469-29.480468zm-107.78125 273.972656-49.375-49.371094 84.835938-84.835937 23.925781 23.925781zm236.945313-123.601562-21.210937-21.207032 21.210937-21.210937 21.207031 21.207031zm-90.839844 6.003906 19.898438 79.597656-35.085938 11.695313-18.289062-73.152344c-12.089844-12.089844-45.335938-45.335937-55.957031-55.957031l95.4375-95.441406 63.625 63.628906zm48.421875-133.257812-21.207031-21.207032 21.207031-21.207031 21.207032 21.207031zm61.292969-23.539063-40.085937-40.085937 84.835937-84.832032 23.121094 23.117188zm0 0';
+      var convertData = function (data) {
+      var res = [];
+      for (var i = 0; i < data.length; i++) {
+      var dataItem = data[i];
+      var fromCoord = geoCoordMap[dataItem[0].name];
+      var toCoord = geoCoordMap[dataItem[1].name];
+      if (fromCoord && toCoord) {
+      res.push([{
+      coord: fromCoord
+      }, {
+      coord: toCoord
+      }]);
+      }
+      }
+      return res;
+      };
+      var color = ['#a6c84c', '#ffa022', '#46bee9'];
+      var series = [];
+      [['CALIFORNIA', CALIFORNIA_Data], ['FLORIDA', FLORIDA_Data], ['GEORGIA', GEORGIA_Data],['INDIANA',INDIANA_Data],['LOUISIANA',LOUISIANA_Data],['NORTH CAROLINA',NORTHCAROLINA_Data],['OHIO',OHIO_Data],['PENNSYLVANIA',PENNSYLVANIA_Data],['TEXAS',TEXAS_Data],['VIRGINIA',VIRGINIA_Data]].forEach(function (item, i) {
+      series.push({
+      name: item[0] + ' Top10',
+      type: 'lines',
+      zlevel: 1,
+      effect: {
+      show: true,
+      period: 6,
+      trailLength: 0.7,
+      color: '#fff',
+      symbolSize: 3
+      },
+      lineStyle: {
+      normal: {
+      color: color[i],
+      width: 0,
+      curveness: 0.2
+      }
+      },
+      data: convertData(item[1])
+      },
+      {
+      name: item[0] + ' Top10',
+      type: 'lines',
+      zlevel: 2,
+      effect: {
+      show: true,
+      period: 6,
+      trailLength: 0,
+      symbol: planePath,
+      symbolSize: 15
+      },
+      lineStyle: {
+      normal: {
+      color: color[i],
+      width: 1,
+      opacity: 0.4,
+      curveness: 0.2
+      }
+      },
+      data: convertData(item[1])
+      },
+      {
+      name: item[0] + ' Top10',
+      type: 'effectScatter',
+      coordinateSystem: 'geo',
+      zlevel: 2,
+      rippleEffect: {
+      brushType: 'stroke'
+      },
+      label: {
+      normal: {
+      show: true,
+      position: 'right',
+      formatter: '{b}'
+      }
+      },
+      symbolSize: function (val) {
+      return val[2] / 8;
+      },
+      itemStyle: {
+      normal: {
+      color: color[i]
+      }
+      },
+      data: item[1].map(function (dataItem) {
+      return {
+      name: dataItem[1].name,
+      value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value])
+      };
+      })
+      });
+      });
+      option = {
+      //        backgroundColor: '#404a59',
+      title: {
+      text: '美国枪支流通情况',
+      /*subtext: 'Develop By WanderGIS',*/
+      left: 'center',
+      textStyle: {
+      color: '#fff'
+      }
+      },
+      tooltip: {
+      trigger: 'item'
+      },
+      legend: {
+      orient: 'vertical',
+      top: 'bottom',
+      left: 'right',
+      data: ['CALIFORNIA Top10', 'FLORIDA Top10', 'GEORGIA Top10','INDIANA Top10','LOUISIANA Top10','NORTH CAROLINA Top10','OHIO Top10','PENNSYLVANIA Top10','TEXAS Top10','VIRGINIA Top10'],
+      textStyle: {
+      color: '#fff'
+      },
+      selectedMode: 'single'
+      },
+      geo: {
+      map: '',
+      label: {
+      emphasis: {
+      show: false
+      }
+      },
+      roam: true,
+      itemStyle: {
+      normal: {
+      areaColor: '#323c48',
+      borderColor: '#404a59'
+      },
+      emphasis: {
+      areaColor: '#2a333d'
+      }
+      }
+      },
+      series: series
+      };
+      // 使用刚指定的配置项和数据显示图表。
+      overlay.setOption(option);

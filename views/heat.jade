@@ -1,0 +1,619 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title Crime in USA
+    link(rel='stylesheet', href='../stylesheets/leaflet.css')
+    style.
+      html, body, #map {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      }
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(href='../../../../favicon.ico', rel='icon')
+    title #{title}
+    script(type='text/javascript',src='/javascripts/jquery.js')
+    script(src='/javascripts/echarts.js', type='text/javascript')
+    // Bootstrap core CSS
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    script(src='/javascripts/jquery.min.js')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/ecStat.js')
+    // script(src="/javascripts/list.js")
+    // Custom styles for this template
+    // link(href='dashboard.css', rel='stylesheet')
+    style(type='text/css').
+        /* Chart.js */
+        @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}
+    
+    // Le styles
+    link(href='/javascript/bootstrap.css', rel='stylesheet')
+    style(type='text/css').
+      #mapid { height: 90%; width:100%}
+      body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+      }
+      .sidebar-nav {
+      padding: 9px 0;
+      }
+      @media (max-width: 980px) {
+      /* Enable use of floated navbar text */
+      .navbar-text.pull-right {
+      float: none;
+      padding-left: 5px;
+      padding-right: 5px;
+      }
+      }
+      @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}
+    link(href='../assets/css/bootstrap-responsive.css', rel='stylesheet')
+    // HTML5 shim, for IE6-8 support of HTML5 elements
+    //if lt IE 9
+      script(src='../assets/js/html5shiv.js')
+    // 
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='Bootstrap是Twitter推出的一个用于前端开发的开源工具包。它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。目前，Bootstrap最新版本为3.0 。Bootstrap中文网致力于为广大国内开发者提供详尽的中文文档、代码实例等，助力开发者掌握并使用这一框架。')
+    meta(name='keywords', content='Bootstrap,CSS,CSS框架,CSS framework,javascript,bootcss,bootstrap开发,bootstrap代码,bootstrap入门')
+    meta(name='author', content='Bootstrap中文网')
+    meta(name='robots', content='index,follow')
+    meta(name='application-name', content='bootcss.com')
+    meta(content='1603466166416277433363757477167', property='qc:admins')
+    // Site CSS
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', rel='stylesheet')
+    link(href='https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', rel='stylesheet')
+    link(href='/assets/css/site.min.css?1539973179973', rel='stylesheet')
+    style.
+      .job-hot {
+      position: absolute;
+      color: #d9534f;
+      right: 0;
+      top: 15px;
+      }
+    // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src='https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js')
+      script(src='https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js')
+    // Favicons
+    link(href='https://assets.bootcss.com/www/assets/ico/apple-touch-icon-precomposed.png?1539973179973', rel='apple-touch-icon-precomposed')
+    link(href='https://assets.bootcss.com/www/assets/ico/favicon.png?1539973179973', rel='shortcut icon')
+    script.
+      var _hmt = _hmt || [];
+    link(href='http://www.bootcss.com/', rel='canonical')
+    script.
+      var qqgroup = '318630708';
+    // 后续修改为本地文件引用
+    link(href='https://unpkg.com/leaflet@1.3.4/dist/leaflet.css', rel='stylesheet', integrity='sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==', crossorigin='')
+    // Make sure you put this AFTER Leaflet's CSS
+    script(src='https://unpkg.com/leaflet@1.3.4/dist/leaflet.js', crossorigin='', integrity='sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==')
+    // Fav and touch icons
+    link(href='../assets/ico/apple-touch-icon-144-precomposed.png', rel='apple-touch-icon-precomposed', sizes='144x144')
+    link(href='../assets/ico/apple-touch-icon-114-precomposed.png', rel='apple-touch-icon-precomposed', sizes='114x114')
+    link(href='../assets/ico/apple-touch-icon-72-precomposed.png', rel='apple-touch-icon-precomposed', sizes='72x72')
+    link(href='../assets/ico/apple-touch-icon-57-precomposed.png', rel='apple-touch-icon-precomposed')
+    link(href='../assets/ico/favicon.png', rel='shortcut icon')
+    // head new 2018.11.3
+    script#twitter-wjs(src='https://platform.twitter.com/widgets.js')
+    script(src='https://consent.cookiebot.com/a28b71f3-4d2e-4eac-93bc-34929948dd7d/cc.js?renew=false&referer=circleci.com&dnt=false&forceshow=false&cbid=a28b71f3-4d2e-4eac-93bc-34929948dd7d&whitelabel=false&brandid=Cookiebot', type='text/javascript', charset='UTF-8', async='')
+    script(type='text/javascript').
+      window.thirdPartyIds = {
+      quantcast: "p-amMve9wcqXH81"
+      };
+    script#Cookiebot(src='https://consent.cookiebot.com/uc.js', type='text/javascript', async='', data-cbid='a28b71f3-4d2e-4eac-93bc-34929948dd7d')
+    script(src='https://cdn.optimizely.com/js/8188917468.js', type='text/plain', data-cookieconsent='statistics')
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    link(title='Latest 10 blog posts (atom)', href='/blog/feed.xml', rel='alternate', type='application/rss+xml')
+    link(href='https://d3r49iyjzglexf.cloudfront.net/favicon-066b37ff00f0f968b903c13ae88b5573b62665aea8fbe91bb61c55dfa9446523.ico', rel='icon', type='image/png')
+    // adding canonical links, if they are specified in front matter /
+    link(href='../assets/css/vender1.css', rel='stylesheet', type='text/css')
+    link(href='../assets/css/vender_lity.css', rel='stylesheet', type='text/css')
+    link(href='https://d3r49iyjzglexf.cloudfront.net/site-e1e90682e27ce8d36ecfc129588eb129f5a3b3024b51d828e844b17bc1994b01.css', rel='stylesheet', type='text/css')
+    script.
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.1.0";
+      var categoryOverride = "home" || null;
+      var nameOverride     = null;
+      var pageUrlParts = "/".split('/').slice(1, -1);
+      // store as globals to read off of it later in analytics.js
+      window.analyticsPageProperties = {
+      categoryOverride: categoryOverride,
+      nameOverride: nameOverride,
+      pageUrlParts: pageUrlParts,
+      };
+      }}();
+    style#CookieConsentStateDisplayStyles(type='text/css').
+      .cookieconsent-optin-preferences,.cookieconsent-optin-statistics,.cookieconsent-optin-marketing,.cookieconsent-optin{display:none;}.cookieconsent-optout-preferences,.cookieconsent-optout-statistics,.cookieconsent-optout-marketing,.cookieconsent-optout{display:block;display:initial;}
+    script(type='text/plain', data-cookieconsent='statistics').
+      analytics.load("AbgkrgN4cbRhAVEwlzMkHbwvrXnxHh35");
+    // Begin Jekyll SEO tag v2.0.0
+    meta(content='Continuous Integration and Delivery', property='og:title')
+    meta(name='description', content='CircleCI’s continuous integration and delivery platform makes it easy for teams of all sizes to rapidly build and release quality software at scale.  Build for Linux, macOS, and Android, in the cloud or behind your firewall.')
+    meta(content='CircleCI’s continuous integration and delivery platform makes it easy for teams of all sizes to rapidly build and release quality software at scale.  Build for Linux, macOS, and Android, in the cloud or behind your firewall.', property='og:description')
+    link(href='https://circleci.com/', rel='canonical')
+    meta(content='https://circleci.com/', property='og:url')
+    meta(content='CircleCI', property='og:site_name')
+    meta(content='https://circleci.com/circleci-logo-horizontal-twitter.png', property='og:image')
+    meta(name='twitter:card', content='summary_large_image')
+    meta(name='twitter:site', content='@circleci')
+    script(type='application/ld+json').
+      {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": "CircleCI",
+      "headline": "Continuous Integration and Delivery",
+      "image": "https://circleci.com/circleci-logo-horizontal-twitter.png",
+      "description": "CircleCI’s continuous integration and delivery platform makes it easy for teams of all sizes to rapidly build and release quality software at scale.  Build for Linux, macOS, and Android, in the cloud or behind your firewall.",
+      "logo": "https://circleci.com/circleci-logo-stacked-fb.png",
+      "sameAs": ["https://www.facebook.com/circleci","https://twitter.com/circleci","https://github.com/circleci","https://www.linkedin.com/company/circleci"],
+      "url": "https://circleci.com/"
+      }
+  body
+    nav.nav-toggle.two
+      .container
+        .row
+          .col-md-12
+            .widescreen
+              a(href='/', data-analytics='top-nav-logo')
+                img.logo(alt='Home', src='../img/logo.jpg ')
+              ul.left-links.main-nav
+                li.nav-item
+                  a(href='/pages/charts', data-analytics='top-nav-product') 可视化展示
+                  .submenu
+                    ul.subnav(data-analytics='topnav-product-clicked')
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/charts') 总览
+                      li.subnav-item(data-analytics='top-nav-product-how-it-works')
+                        a(href='/users/scatter') 全美暴力犯罪情况
+                      li.subnav-item(data-analytics='top-nav-product-features')
+                        a(href='/users/pie') 犯罪率与GDP的关系
+                      li.subnav-item(data-analytics='top-nav-product-build-environments')
+                        a(href='/users/usa') 谋杀案件数量与武器持有的关系
+                      li.subnav-item(data-analytics='top-nav-product-hosting-options')
+                        a(href='/users/bar') 城市犯罪率
+                      // <li class="subnav-item" data-analytics="top-nav-product-integrations"><a href="/integrations/">Integrations</a></li>
+                li.nav-item
+                 
+                li.nav-item
+                  a(href='/pages/analysis', data-analytics='top-nav-product')| GIS分析
+                  .submenu
+                    ul.subnav(data-analytics='topnav-product-clicked')
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/usanew') 警力分布预测
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/usanew2') 2017年暴力事件犯罪率
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/molan') 局部莫兰指数与批捕率的关系
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/ae') arcengine操作实录
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/youtube') 三维视频播放
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/SDcities') 最危险与最安全的五个州
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/Gun') 全美武器流通图
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/Heat') 全美热力图
+                  .submenu
+                li.nav-item(data-analytics='top-nav-pricing')
+                  a(href='/pages/OurTeam') 我们的团队
+              ul.right-links.main-nav(style='display: block;')
+                li.default-item.nav-item
+                  a(href='direction.html', data-analytics='top-nav-contact-us') 网站说明
+                li.divider-left.nav-item.visitor-item
+                  a(href='/users/login', data-analytics='top-nav-login', data-hj-masked='') 登录
+                li.nav-item.visitor-item
+                  a.btn-primary.small(href='/users/reg', data-analytics='top-nav-signup', data-analytics-action='signup-clicked', data-analytics-location='nav', data-optimizely='signup_button_clicked')
+                    | 注册
+                li.dashboard-link.desktop-nav.divider-left
+                  a(href='/dashboard', data-analytics='top-nav-go-to-app') Go to app
+            .narrowscreen
+              button.navbar-toggle.collapsed(aria-expanded='false', aria-controls='#mobile-navigation', type='button', data-target='#mobile-navigation', data-toggle='collapse')
+                span.sr-only Toggle navigation
+                span.icon-bar.top-bar
+                span.icon-bar.middle-bar
+                span.icon-bar.bottom-bar
+              a(href='/', data-analytics='top-nav-logo')
+                img.logo(alt='CircleCI Home', src='../img/logo.jpg')
+              span.login
+                a.mobile-nav.signup.visitor-item(href='users/login', data-analytics='top-nav-login', data-hj-masked='', data-analytics-location='nav') 登录
+                a.dashboard-link.mobile-nav(href='/dashboard', data-analytics='top-nav-go-to-app') Go to app
+              ul#mobile-navigation.dropdown-menu2
+                li
+                  a.btn-primary(href='users/reg', data-analytics='top-nav-signup', data-analytics-action='signup-clicked', data-optimizely='signup_button_clicked') 注册
+                li.arrow.collapsed.border-bottom
+                  span.heading(data-analytics='top-nav-product')
+                    i.fa.fa-angle-right(aria-hidden='true')
+                    |                 可视化展示
+                  ul.subnav
+                    li.subnav-item(data-analytics='top-nav-product-overview')
+                      a(href='/pages/charts') 总览
+                    li.subnav-item(data-analytics='top-nav-product-how-it-works')
+                      a(href='/users/scatter') 全美暴力犯罪情况
+                    li.subnav-item(data-analytics='top-nav-product-features')
+                      a(href='/users/pie') 犯罪类型统计
+                    li.subnav-item(data-analytics='top-nav-product-build-environments')
+                      a(href='/users/usa') 谋杀案件数量与武器持有的关系
+                    li.subnav-item(data-analytics='top-nav-product-hosting-options')
+                      a(href='/users/bar') 城市犯罪率
+                    // <li class="subnav-item" data-analytics="top-nav-developer-integrations"><a href="/integrations/">Integrations</a></li>
+                li.arrow.collapsed.border-bottom
+                  span.heading
+                    i.fa.fa-angle-right(aria-hidden='true')
+                    |                 GIS分析
+                li.border-bottom(data-analytics='top-nav-pricing')
+                  a(href='/pages/OurTeam') 我们的团队
+    #map
+    script(src='../javascripts/main.min.js')
+    script.
+      var map = L.map('map');
+      var baseLayers = {
+      "高德地图": L.tileLayer('http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+      subdomains: "1234"
+      }),
+      '高德影像': L.layerGroup([L.tileLayer('http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
+      subdomains: "1234"
+      }), L.tileLayer('http://t{s}.tianditu.cn/DataServer?T=cta_w&X={x}&Y={y}&L={z}', {
+      subdomains: "1234"
+      })]),
+      "立体地图": L.tileLayer('https://a.tiles.mapbox.com/v3/examples.c7d2024a/{z}/{x}/{y}.png', {
+      attribution: 'Map &copy; Pacific Rim Coordination Center (PRCC).  Certain data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+      key: 'BC9A493B41014CAABB98F0471D759707',
+      styleId: 22677
+      }),
+      "Foursquare": L.tileLayer('https://a.tiles.mapbox.com/v3/foursquare.map-0y1jh28j/{z}/{x}/{y}.png', {
+      attribution: 'Map &copy; Pacific Rim Coordination Center (PRCC).  Certain data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+      key: 'BC9A493B41014CAABB98F0471D759707',
+      styleId: 22677
+      }),
+      "Openstreetmap": L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+      attribution:'Map data  <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+      key: 'BC9A493B41014CAABB98F0471D759707',
+      styleId: 22677
+      }),
+      'GeoQ灰色底图': L.tileLayer('http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}').addTo(map)
+      };
+      L.tileLayer('https://a.tiles.mapbox.com/v3/foursquare.map-0y1jh28j/{z}/{x}/{y}.png', {
+      attribution: 'Map &copy; Pacific Rim Coordination Center (PRCC).  Certain data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+      key: 'BC9A493B41014CAABB98F0471D759707',
+      styleId: 22677
+      });
+      var layercontrol = L.control.layers(baseLayers,{}, {
+      position: "topleft"
+      }).addTo(map);
+      //map.setView(L.latLng(37.550339, 104.114129), 4);
+      map.setView(L.latLng(37.550339, -90.114129), 4);
+      var overlay = new L.echartsLayer3(map, echarts);
+      var chartsContainer = overlay.getEchartsContainer();
+      var myChart = overlay.initECharts(chartsContainer);
+      var arrest_data = [
+      {name: 'ALABAMA', value: 347.9794961},
+      {name: 'ALASKA', value: 415.9283204},
+      {name: 'ARIZONA', value: 347.1869001},
+      {name: 'ARKANSAS', value: 383.6885435},
+      {name: 'CALIFORNIA', value: 299.4838519},
+      {name: 'COLORADO', value: 309.5348099},
+      {name: 'CONNECTICUT', value: 203.5964696},
+      {name: 'DELAWARE', value: 327.7953769},
+      {name: 'FLORIDA', value: 311.0445776},
+      {name: 'GEORGIA', value: 337.0038842},
+      {name: 'HAWAII', value: 320.6099604},
+      {name: 'IDAHO', value: 197.8124148},
+      {name: 'ILLINOIS', value: 248.7666066},
+      {name: 'INDIANA', value: 293.9038201},
+      {name: 'IOWA', value: 239.7353578},
+      {name: 'KANSAS', value: 323.131679},
+      {name: 'KENTUCKY', value: 243.8283245},
+      {name: 'LOUISIANA', value: 386.2183875},
+      {name: 'MAINE', value: 177.08941},
+      {name: 'MARYLAND', value: 280.0696195},
+      {name: 'MASSACHUSETTS', value: 194.0363623},
+      {name: 'MICHIGAN', value: 237.6124295},
+      {name: 'MINNESOTA', value: 237.2612013},
+      {name: 'MISSISSIPPI', value: 304.5874694},
+      {name: 'MISSOURI', value: 332.2527538},
+      {name: 'MONTANA', value: 308.4948241},
+      {name: 'NEBRASKA', value: 256.1224741},
+      {name: 'NEVADA', value: 326.0895452},
+      {name: 'NEW HAMPSHIRE', value: 172.2152935},
+      {name: 'NEW JERSEY', value: 178.063703},
+      {name: 'NEW MEXICO', value: 462.805788},
+      {name: 'NEW YORK', value: 191.3357168},
+      {name: 'NORTH CAROLINA', value: 310.6642332},
+      {name: 'NORTH DAKOTA', value: 256.1849148},
+      {name: 'OHIO', value: 289.6988046},
+      {name: 'OKLAHOMA', value: 346.4877014},
+      {name: 'OREGON', value: 324.7659257},
+      {name: 'PENNSYLVANIA', value: 205.5065717},
+      {name: 'RHODE ISLAND', value: 202.7202085},
+      {name: 'SOUTH CAROLINA', value: 376.3663293},
+      {name: 'SOUTH DAKOTA', value: 241.9266849},
+      {name: 'TENNESSEE', value: 351.3969072},
+      {name: 'TEXAS', value: 319.2834281},
+      {name: 'UTAH', value: 321.8024643},
+      {name: 'VERMONT', value: 169.341979},
+      {name: 'VIRGINIA', value: 208.9125996},
+      {name: 'WASHINGTON', value: 380.5761733},
+      {name: 'WEST VIRGINIA', value: 240.1515446},
+      {name: 'WISCONSIN', value: 224.5433288},
+      {name: 'WYOMING', value: 220.392881},
+      ];
+      var crime_data = [
+      {name: 'ALABAMA', value: 169137},
+      {name: 'ALASKA', value: 30842},
+      {name: 'ARIZONA', value: 239859},
+      {name: 'ARKANSAS', value: 114655},
+      {name: 'CALIFORNIA', value: 1176866},
+      {name: 'COLORADO', value: 171176},
+      {name: 'CONNECTICUT', value: 73044},
+      {name: 'DELAWARE', value: 31229},
+      {name: 'FLORIDA', value: 642512},
+      {name: 'GEORGIA', value: 347573},
+      {name: 'HAWAII', value: 45805},
+      {name: 'IDAHO', value: 33233},
+      {name: 'ILLINOIS', value: 319310},
+      {name: 'INDIANA', value: 194976},
+      {name: 'IOWA', value: 75058},
+      {name: 'KANSAS', value: 93958},
+      {name: 'KENTUCKY', value: 108165},
+      {name: 'LOUISIANA', value: 180988},
+      {name: 'MAINE', value: 23557},
+      {name: 'MARYLAND', value: 168735},
+      {name: 'MASSACHUSETTS', value: 132405},
+      {name: 'MICHIGAN', value: 236031},
+      {name: 'MINNESOTA', value: 131088},
+      {name: 'MISSISSIPPI', value: 90932},
+      {name: 'MISSOURI', value: 202381},
+      {name: 'MONTANA', value: 32042},
+      {name: 'NEBRASKA', value: 48858},
+      {name: 'NEVADA', value: 95846},
+      {name: 'NEW HAMPSHIRE', value: 22991},
+      {name: 'NEW JERSEY', value: 159873},
+      {name: 'NEW MEXICO', value: 96515},
+      {name: 'NEW YORK', value: 379539},
+      {name: 'NORTH CAROLINA', value: 315532},
+      {name: 'NORTH DAKOTA', value: 19356},
+      {name: 'OHIO', value: 336704},
+      {name: 'OKLAHOMA', value: 135865},
+      {name: 'OREGON', value: 132699},
+      {name: 'PENNSYLVANIA', value: 262783},
+      {name: 'RHODE ISLAND', value: 21439},
+      {name: 'SOUTH CAROLINA', value: 186671},
+      {name: 'SOUTH DAKOTA', value: 20843},
+      {name: 'TENNESSEE', value: 233658},
+      {name: 'TEXAS', value: 890956},
+      {name: 'UTAH', value: 97967},
+      {name: 'VERMONT', value: 10556},
+      {name: 'VIRGINIA', value: 175787},
+      {name: 'WASHINGTON', value: 277095},
+      {name: 'WEST VIRGINIA', value: 43915},
+      {name: 'WISCONSIN', value: 129627},
+      {name: 'WYOMING', value: 12891},
+      ];
+      var geoCoordMap = {
+      'ALABAMA':[-86.79972,33.52222],
+      'ALASKA':[-149.88722,61.21667],
+      'ARIZONA':[-112.07500,33.44861],
+      'ARKANSAS':[-92.33111,34.73611],
+      'CALIFORNIA':[-118.24361,34.05222],
+      'COLORADO':[-104.98472,39.73917],
+      'CONNECTICUT':[-73.19556,41.18639],
+      'DELAWARE':[-75.54667,39.74583],
+      'FLORIDA':[-80.22639,25.78889],
+      'GEORGIA':[-84.39000,33.74722],
+      'HAWAII':[-157.85944,21.30694],
+      'IDAHO':[-116.23778,43.61361],
+      'ILLINOIS':[-87.62778,41.87778 ],
+      'INDIANA':[-86.14806,39.79111],
+      'IOWA':[-93.62083,41.59083],
+      'KANSAS':[-97.33611,37.68889],
+      'KENTUCKY':[-85.76667,38.25000],
+      'LOUISIANA':[-90.05000,29.96667],
+      'MAINE':[-70.26667,43.66667],
+      'MARYLAND':[-76.61667,39.28333],
+      'MASSACHUSETTS':[-71.05972,42.35806],
+      'MICHIGAN':[-83.04583,42.33139],
+      'MINNESOTA':[-93.26667,44.98333],
+      'MISSISSIPPI':[-89.18611,31.05639],
+      'MISSOURI':[-90.19833,38.62750],
+      'MONTANA':[-108.53722,45.78667],
+      'NEBRASKA':[-96.00000,41.25000],
+      'NEVADA':[-115.17361,36.11389],
+      'NEW HAMPSHIRE':[-71.45444,42.99583],
+      'NEW JERSEY':[-74.17250,40.72417],
+      'NEW MEXICO':[-106.61000,35.11083 ],
+      'NEW YORK':[-74.00000,40.71250],
+      'NORTH CAROLINA':[-80.84389,35.22778],
+      'NORTH DAKOTA':[-96.78944,46.87722],
+      'OHIO':[-84.51667,39.10000],
+      'OKLAHOMA':[-97.53500,35.48222 ],
+      'OREGON':[-122.68194,45.52000],
+      'PENNSYLVANIA':[-75.17000,39.95000],
+      'RHODE ISLAND':[-71.42222,41.82361],
+      'SOUTH CAROLINA':[-81.03417,34.00111],
+      'SOUTH DAKOTA':[-96.70000,43.55056],
+      'TENNESSEE':[-86.78333,36.16667 ],
+      'TEXAS':[-96.80167,32.77972 ],
+      'UTAH':[-111.89111,40.76139 ],
+      'VERMONT':[-73.21194,44.47583 ],
+      'VIRGINIA':[-76.28556,36.85111],
+      'WASHINGTON':[-122.33222,47.60583],
+      'WEST VIRGINIA':[-81.63333,38.34722],
+      'WISCONSIN':[-87.95000,43.05000],
+      'WYOMING':[-104.80194,41.14556],
+      };
+      var convertData = function (data) {
+      var res = [];
+      for (var i = 0; i < data.length; i++) {
+      var geoCoord = geoCoordMap[data[i].name];
+      if (geoCoord) {
+      res.push({
+      name: data[i].name,
+      value: geoCoord.concat(data[i].value)
+      });
+      }
+      }
+      return res;
+      };
+      option = {
+      // backgroundColor: '#404a59',
+      title: {
+      text: 'crime in USA',
+      subtext: 'Data from FBI',
+      sublink: 'https://ucr.fbi.gov/crime-in-the-u.s',
+      left: 'center',
+      textStyle: {
+      color: '#fff'
+      }
+      },
+      tooltip : {
+      trigger: 'item'
+      },
+      legend: {
+      orient: 'vertical',
+      top: 'top',
+      left: 'right',
+      data: ['arrest','crime','arrest_top10','crime_top10'],
+      textStyle: {
+      color: '#fff'
+      },
+      selectedMode: 'single'
+      },
+      geo: {
+      map: '',
+      label: {
+      emphasis: {
+      show: false
+      }
+      },
+      roam: true,
+      itemStyle: {
+      normal: {
+      areaColor: '#323c48',
+      borderColor: '#111'
+      },
+      emphasis: {
+      areaColor: '#2a333d'
+      }
+      }
+      },
+      series : [
+      {
+      name: 'arrest',
+      type: 'scatter',
+      coordinateSystem: 'geo',
+      data: convertData(arrest_data),
+      symbolSize: function (val) {
+      return val[2] / 12;
+      },
+      label: {
+      normal: {
+      formatter: '{b}',
+      position: 'right',
+      show: false
+      },
+      emphasis: {
+      show: true
+      }
+      },
+      itemStyle: {
+      normal: {
+      color: '#ddb926'
+      }
+      }
+      },
+      {
+      name: 'arrest_top10',
+      type: 'effectScatter',
+      coordinateSystem: 'geo',
+      data: convertData(arrest_data.sort(function (a, b) {
+      return b.value - a.value;
+      }).slice(0, 10)),
+      symbolSize: function (val) {
+      return val[2] / 8;
+      },
+      showEffectOn: 'render',
+      rippleEffect: {
+      brushType: 'stroke'
+      },
+      hoverAnimation: true,
+      label: {
+      normal: {
+      formatter: '{b}',
+      position: 'right',
+      show: true
+      }
+      },
+      itemStyle: {
+      normal: {
+      color: '#f4e925',
+      shadowBlur: 10,
+      shadowColor: '#333'
+      }
+      },
+      zlevel: 1
+      },
+      {
+      name: 'crime',
+      type: 'scatter',
+      coordinateSystem: 'geo',
+      data: convertData(crime_data),
+      symbolSize: function (val) {
+      return val[2] / 15000;
+      },
+      label: {
+      normal: {
+      formatter: '{b}',
+      position: 'right',
+      show: false
+      },
+      emphasis: {
+      show: true
+      }
+      },
+      itemStyle: {
+      normal: {
+      color: '#ddb926'
+      }
+      }
+      },
+      {
+      name: 'crime_top10',
+      type: 'effectScatter',
+      coordinateSystem: 'geo',
+      data: convertData(crime_data.sort(function (a, b) {
+      return b.value - a.value;
+      }).slice(0, 10)),
+      symbolSize: function (val) {
+      return val[2] / 10000;
+      },
+      showEffectOn: 'render',
+      rippleEffect: {
+      brushType: 'stroke'
+      },
+      hoverAnimation: true,
+      label: {
+      normal: {
+      formatter: '{b}',
+      position: 'right',
+      show: true
+      }
+      },
+      itemStyle: {
+      normal: {
+      color: '#f4e925',
+      shadowBlur: 10,
+      shadowColor: '#333'
+      }
+      },
+      zlevel: 1
+      }
+      ]
+      };
+      // 使用刚指定的配置项和数据显示图表。
+      overlay.setOption(option);

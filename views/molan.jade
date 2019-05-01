@@ -1,0 +1,421 @@
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(href='../../../../favicon.ico', rel='icon')
+    title #{title}
+    script(type='text/javascript',src='/javascripts/jquery.js')
+    script(src='/javascripts/echarts.js', type='text/javascript')
+    // Bootstrap core CSS
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    script(src='/javascripts/jquery.min.js')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/ecStat.js')
+    // script(src="/javascripts/list.js")
+    // Custom styles for this template
+    // link(href='dashboard.css', rel='stylesheet')
+    style(type='text/css').
+        /* Chart.js */
+        @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}
+    
+    // Le styles
+    link(href='/javascript/bootstrap.css', rel='stylesheet')
+    style(type='text/css').
+      #mapid { height: 90%; width:100%}
+      body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+      }
+      .sidebar-nav {
+      padding: 9px 0;
+      }
+      @media (max-width: 980px) {
+      /* Enable use of floated navbar text */
+      .navbar-text.pull-right {
+      float: none;
+      padding-left: 5px;
+      padding-right: 5px;
+      }
+      }
+      @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}
+    link(href='../assets/css/bootstrap-responsive.css', rel='stylesheet')
+    // HTML5 shim, for IE6-8 support of HTML5 elements
+    //if lt IE 9
+      script(src='../assets/js/html5shiv.js')
+    // 
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='Bootstrap是Twitter推出的一个用于前端开发的开源工具包。它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。目前，Bootstrap最新版本为3.0 。Bootstrap中文网致力于为广大国内开发者提供详尽的中文文档、代码实例等，助力开发者掌握并使用这一框架。')
+    meta(name='keywords', content='Bootstrap,CSS,CSS框架,CSS framework,javascript,bootcss,bootstrap开发,bootstrap代码,bootstrap入门')
+    meta(name='author', content='Bootstrap中文网')
+    meta(name='robots', content='index,follow')
+    meta(name='application-name', content='bootcss.com')
+    meta(content='1603466166416277433363757477167', property='qc:admins')
+    // Site CSS
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', rel='stylesheet')
+    link(href='https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', rel='stylesheet')
+    link(href='/assets/css/site.min.css?1539973179973', rel='stylesheet')
+    style.
+      .job-hot {
+      position: absolute;
+      color: #d9534f;
+      right: 0;
+      top: 15px;
+      }
+    // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src='https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js')
+      script(src='https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js')
+    // Favicons
+    link(href='https://assets.bootcss.com/www/assets/ico/apple-touch-icon-precomposed.png?1539973179973', rel='apple-touch-icon-precomposed')
+    link(href='https://assets.bootcss.com/www/assets/ico/favicon.png?1539973179973', rel='shortcut icon')
+    script.
+      var _hmt = _hmt || [];
+    link(href='http://www.bootcss.com/', rel='canonical')
+    script.
+      var qqgroup = '318630708';
+    // 后续修改为本地文件引用
+    link(href='https://unpkg.com/leaflet@1.3.4/dist/leaflet.css', rel='stylesheet', integrity='sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==', crossorigin='')
+    // Make sure you put this AFTER Leaflet's CSS
+    script(src='https://unpkg.com/leaflet@1.3.4/dist/leaflet.js', crossorigin='', integrity='sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==')
+    // Fav and touch icons
+    link(href='../assets/ico/apple-touch-icon-144-precomposed.png', rel='apple-touch-icon-precomposed', sizes='144x144')
+    link(href='../assets/ico/apple-touch-icon-114-precomposed.png', rel='apple-touch-icon-precomposed', sizes='114x114')
+    link(href='../assets/ico/apple-touch-icon-72-precomposed.png', rel='apple-touch-icon-precomposed', sizes='72x72')
+    link(href='../assets/ico/apple-touch-icon-57-precomposed.png', rel='apple-touch-icon-precomposed')
+    link(href='../assets/ico/favicon.png', rel='shortcut icon')
+    // head new 2018.11.3
+    script#twitter-wjs(src='https://platform.twitter.com/widgets.js')
+    script(src='https://consent.cookiebot.com/a28b71f3-4d2e-4eac-93bc-34929948dd7d/cc.js?renew=false&referer=circleci.com&dnt=false&forceshow=false&cbid=a28b71f3-4d2e-4eac-93bc-34929948dd7d&whitelabel=false&brandid=Cookiebot', type='text/javascript', charset='UTF-8', async='')
+    script(type='text/javascript').
+      window.thirdPartyIds = {
+      quantcast: "p-amMve9wcqXH81"
+      };
+    script#Cookiebot(src='https://consent.cookiebot.com/uc.js', type='text/javascript', async='', data-cbid='a28b71f3-4d2e-4eac-93bc-34929948dd7d')
+    script(src='https://cdn.optimizely.com/js/8188917468.js', type='text/plain', data-cookieconsent='statistics')
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    link(title='Latest 10 blog posts (atom)', href='/blog/feed.xml', rel='alternate', type='application/rss+xml')
+    link(href='https://d3r49iyjzglexf.cloudfront.net/favicon-066b37ff00f0f968b903c13ae88b5573b62665aea8fbe91bb61c55dfa9446523.ico', rel='icon', type='image/png')
+    // adding canonical links, if they are specified in front matter /
+    link(href='../assets/css/vender1.css', rel='stylesheet', type='text/css')
+    link(href='../assets/css/vender_lity.css', rel='stylesheet', type='text/css')
+    link(href='https://d3r49iyjzglexf.cloudfront.net/site-e1e90682e27ce8d36ecfc129588eb129f5a3b3024b51d828e844b17bc1994b01.css', rel='stylesheet', type='text/css')
+    script.
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.1.0";
+      var categoryOverride = "home" || null;
+      var nameOverride     = null;
+      var pageUrlParts = "/".split('/').slice(1, -1);
+      // store as globals to read off of it later in analytics.js
+      window.analyticsPageProperties = {
+      categoryOverride: categoryOverride,
+      nameOverride: nameOverride,
+      pageUrlParts: pageUrlParts,
+      };
+      }}();
+    style#CookieConsentStateDisplayStyles(type='text/css').
+      .cookieconsent-optin-preferences,.cookieconsent-optin-statistics,.cookieconsent-optin-marketing,.cookieconsent-optin{display:none;}.cookieconsent-optout-preferences,.cookieconsent-optout-statistics,.cookieconsent-optout-marketing,.cookieconsent-optout{display:block;display:initial;}
+    script(type='text/plain', data-cookieconsent='statistics').
+      analytics.load("AbgkrgN4cbRhAVEwlzMkHbwvrXnxHh35");
+    // Begin Jekyll SEO tag v2.0.0
+    meta(content='Continuous Integration and Delivery', property='og:title')
+    meta(name='description', content='CircleCI’s continuous integration and delivery platform makes it easy for teams of all sizes to rapidly build and release quality software at scale.  Build for Linux, macOS, and Android, in the cloud or behind your firewall.')
+    meta(content='CircleCI’s continuous integration and delivery platform makes it easy for teams of all sizes to rapidly build and release quality software at scale.  Build for Linux, macOS, and Android, in the cloud or behind your firewall.', property='og:description')
+    link(href='https://circleci.com/', rel='canonical')
+    meta(content='https://circleci.com/', property='og:url')
+    meta(content='CircleCI', property='og:site_name')
+    meta(content='https://circleci.com/circleci-logo-horizontal-twitter.png', property='og:image')
+    meta(name='twitter:card', content='summary_large_image')
+    meta(name='twitter:site', content='@circleci')
+    script(type='application/ld+json').
+      {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": "CircleCI",
+      "headline": "Continuous Integration and Delivery",
+      "image": "https://circleci.com/circleci-logo-horizontal-twitter.png",
+      "description": "CircleCI’s continuous integration and delivery platform makes it easy for teams of all sizes to rapidly build and release quality software at scale.  Build for Linux, macOS, and Android, in the cloud or behind your firewall.",
+      "logo": "https://circleci.com/circleci-logo-stacked-fb.png",
+      "sameAs": ["https://www.facebook.com/circleci","https://twitter.com/circleci","https://github.com/circleci","https://www.linkedin.com/company/circleci"],
+      "url": "https://circleci.com/"
+      }
+  body(style='background: #202020')
+    nav.nav-toggle.two
+      .container
+        .row
+          .col-md-12
+            .widescreen
+              a(href='/', data-analytics='top-nav-logo')
+                img.logo(alt='Home', src='../img/logo.jpg ')
+              ul.left-links.main-nav
+                li.nav-item
+                  a(href='/pages/charts', data-analytics='top-nav-product') 可视化展示
+                  .submenu
+                    ul.subnav(data-analytics='topnav-product-clicked')
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/charts') 总览
+                      li.subnav-item(data-analytics='top-nav-product-how-it-works')
+                        a(href='/users/scatter') 全美暴力犯罪情况
+                      li.subnav-item(data-analytics='top-nav-product-features')
+                        a(href='/users/pie') 犯罪率与GDP的关系
+                      li.subnav-item(data-analytics='top-nav-product-build-environments')
+                        a(href='/users/usa') 谋杀案件数量与武器持有的关系
+                      li.subnav-item(data-analytics='top-nav-product-hosting-options')
+                        a(href='/users/bar') 城市犯罪率
+                      // <li class="subnav-item" data-analytics="top-nav-product-integrations"><a href="/integrations/">Integrations</a></li>
+                li.nav-item
+                 
+                li.nav-item
+                  a(href='/pages/analysis', data-analytics='top-nav-product')| GIS分析
+                  .submenu
+                    ul.subnav(data-analytics='topnav-product-clicked')
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/usanew') 警力分布预测
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/usanew2') 2017年暴力事件犯罪率
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/molan') 局部莫兰指数与批捕率的关系
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/ae') arcengine操作实录
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/youtube') 三维视频播放
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/SDcities') 最危险与最安全的五个州
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/Gun') 全美武器流通图
+                      li.subnav-item(data-analytics='top-nav-product-overview')
+                        a(href='/pages/Heat') 全美热力图
+                  .submenu
+                li.nav-item(data-analytics='top-nav-pricing')
+                  a(href='/pages/OurTeam') 我们的团队
+              ul.right-links.main-nav(style='display: block;')
+                li.default-item.nav-item
+                  a(href='direction.html', data-analytics='top-nav-contact-us') 网站说明
+                li.divider-left.nav-item.visitor-item
+                  a(href='/users/login', data-analytics='top-nav-login', data-hj-masked='') 登录
+                li.nav-item.visitor-item
+                  a.btn-primary.small(href='/users/reg', data-analytics='top-nav-signup', data-analytics-action='signup-clicked', data-analytics-location='nav', data-optimizely='signup_button_clicked')
+                    | 注册
+                li.dashboard-link.desktop-nav.divider-left
+                  a(href='/dashboard', data-analytics='top-nav-go-to-app') Go to app
+            .narrowscreen
+              button.navbar-toggle.collapsed(aria-expanded='false', aria-controls='#mobile-navigation', type='button', data-target='#mobile-navigation', data-toggle='collapse')
+                span.sr-only Toggle navigation
+                span.icon-bar.top-bar
+                span.icon-bar.middle-bar
+                span.icon-bar.bottom-bar
+              a(href='/', data-analytics='top-nav-logo')
+                img.logo(alt='CircleCI Home', src='../img/logo.jpg')
+              span.login
+                a.mobile-nav.signup.visitor-item(href='users/login', data-analytics='top-nav-login', data-hj-masked='', data-analytics-location='nav') 登录
+                a.dashboard-link.mobile-nav(href='/dashboard', data-analytics='top-nav-go-to-app') Go to app
+              ul#mobile-navigation.dropdown-menu2
+                li
+                  a.btn-primary(href='users/reg', data-analytics='top-nav-signup', data-analytics-action='signup-clicked', data-optimizely='signup_button_clicked') 注册
+                li.arrow.collapsed.border-bottom
+                  span.heading(data-analytics='top-nav-product')
+                    i.fa.fa-angle-right(aria-hidden='true')
+                    |                 可视化展示
+                  ul.subnav
+                    li.subnav-item(data-analytics='top-nav-product-overview')
+                      a(href='/pages/charts') 总览
+                    li.subnav-item(data-analytics='top-nav-product-how-it-works')
+                      a(href='/users/scatter') 全美暴力犯罪情况
+                    li.subnav-item(data-analytics='top-nav-product-features')
+                      a(href='/users/pie') 犯罪类型统计
+                    li.subnav-item(data-analytics='top-nav-product-build-environments')
+                      a(href='/users/usa') 谋杀案件数量与武器持有的关系
+                    li.subnav-item(data-analytics='top-nav-product-hosting-options')
+                      a(href='/users/bar') 城市犯罪率
+                    // <li class="subnav-item" data-analytics="top-nav-developer-integrations"><a href="/integrations/">Integrations</a></li>
+                li.arrow.collapsed.border-bottom
+                  span.heading
+                    i.fa.fa-angle-right(aria-hidden='true')
+                    |                 GIS分析
+                li.border-bottom(data-analytics='top-nav-pricing')
+                  a(href='/pages/OurTeam') 我们的团队
+    .container-fluid
+      .row-fluid
+        .col-sm-3.col-md-2.sidebar
+          br
+          .hero-unit
+            img.img-circle(src='/img/avatar.jpg')
+            p
+            p This place used for account name inf etc.
+          .well.sidebar-nav
+            ul.nav.nav-list
+              li.navbar-header
+              li
+                a(href='/users/scatter') 全美暴力犯罪情况
+              li
+                a(href='/users/pie') 犯罪类型统计
+              li
+                a(href='/users/usa') 谋杀案件数量与武器持有的关系
+              li
+                a(href='/users/bar') 城市犯罪率
+              li
+                a(href='/pages/usanew') 警力分布预测
+              li
+                a(href='/pages/usanew2') 2017年暴力事件犯罪率
+              li.active
+                a(href='/pages/molan') 局部莫兰指数与批捕率的关系
+              li
+                a(href='/pages/ae') arcengine操作实录
+              li
+                a(href='/pages/youtube') 三维视频播放
+              li
+                a(href='/pages/SDcities') 最危险与最安全的五个州
+              li
+                a(href='/pages/Gun') 全美武器流通图
+              li
+                a(href='/pages/Heat') 全美热力图
+        .span9
+          .row-fluid
+            h2(style='color: #A0A0A0') 犯罪率与GDP的关系
+            #chart(style='width: 1000px; height: 600px;')
+              hr
+              #footer
+                .container
+                  p.muted.credit Written by Team XXX 2018.10 Wuhan . 
+    script(type="text/javascript").
+      $(document).ready(function(){
+      var chart = document.getElementById('chart');
+      var chartData = echarts.init(chart);
+      app = [];
+      jQuery.noConflict()
+        var data = [
+            [4.263,1.271049],
+            [4.122,2.438784],
+            [3.797,-0.694316],    
+            [4.619,0.89141],
+            [3.838,-0.14144],
+            [3.151,-0.211998],
+            [2.919,0.403724],
+            [2.554,0.066983],
+            [3.783,0.840276],
+            [3.47,-0.142655],
+            [3.909,-1.316686],
+            [1.956,-1.876449],
+            [4.155,-0.296832],
+            [2.844,1.020194],
+            [4.572,-0.464047],
+            [3.875,-0.217131],
+            [3.21,-0.253443],
+            [2.426,1.430084],
+            [6.121,0.926862],
+            [3.058,0.288326],
+            [4.974,2.243173],
+            [4.102,1.827642],
+            [2.185,1.285346],
+            [5.397,1.57601],
+            [2.598,-1.154419],
+            [5.045,0.122517],
+            [4.724,2.147442],
+            [2.187,-1.785259],
+            [4.22,2.651349],
+            [2.861,0.199801],
+            [3.899,0.189382],
+            [2.36,-2.795323],
+            [6.959,-4.753973],
+            [5.213,6.243295],
+            [2.749,0.173185],
+            [2.758,-3.493719],
+            [6.561,0.403544],
+            [3.379,0.325931],
+            [1.993,4.0545],
+            [4.99,-0.344433],
+            [2.156,0.739175],
+            [1.301,2.135906],
+            [2.425,0.700602],
+            [2.394,0.648915],
+            [3.831,-0.857562],
+            [3.496,0.136825],
+            [2.221,2.868157],
+            [0.118,1.403144],
+        ];
+
+        // See https://github.com/ecomfe/echarts-stat
+        var myRegression = ecStat.regression('linear', data);
+
+        myRegression.points.sort(function(a, b) {
+            return a[0] - b[0];
+        });
+
+        chartData.setOption({
+            title: {
+                text: '局部墨兰指数与批捕率的关系',
+                subtext: 'By Heymax Xu',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
+            },
+            xAxis: {
+                name: '犯罪率',
+                type: 'value',
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed'
+                    }
+                },
+            },
+            yAxis: {
+                name: '局部墨兰指数',
+                type: 'value',
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed'
+                    }
+                },
+            },
+            series: [{
+                name: 'scatter',
+                type: 'scatter',
+                label: {
+                    emphasis: {
+                        show: true,
+                        position: 'left',
+                        textStyle: {
+                            color: 'blue',
+                            fontSize: 16
+                        }
+                    }
+                },
+                data: data
+            }, {
+                name: 'line',
+                type: 'line',
+                showSymbol: false,
+                data: myRegression.points,
+                markPoint: {
+                    itemStyle: {
+                        normal: {
+                            color: 'transparent'
+                        }
+                    },
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'left',
+                            formatter: myRegression.expression,
+                            textStyle: {
+                                color: '#333',
+                                fontSize: 14
+                            }
+                        }
+                    },
+                    data: [{
+                        coord: myRegression.points[myRegression.points.length - 1]
+                    }]
+                }
+            }]
+        });
+        });
