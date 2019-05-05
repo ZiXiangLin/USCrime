@@ -5,7 +5,7 @@ function connectServer(){
     var client=mysql.createConnection({
         host:'localhost',
         user:'root',
-        password:'nlnlbnlx',
+        password:'Rui980209',
         database:'crime'
     })
 

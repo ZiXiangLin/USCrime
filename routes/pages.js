@@ -4,7 +4,7 @@ var router = express.Router();
 var mysql = require('mysql');
 //配置模块
 var settings = require('../config/conf.js');
-var scattergis = require('../GisU/scattergis');
+//var scattergis = require('../GisU/scattergis');
 
 // router.get("/login",function(req,res){
 //     res.render("login");

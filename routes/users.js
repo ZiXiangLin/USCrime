@@ -1,14 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var userGis = require('../GisU/userGis');
-var usagis = require('../GisU/usagis');
+
+/*var usagis = require('../GisU/usagis');
 var usagis2016 = require('../GisU/usagis2016');
 var usagis2015 = require('../GisU/usagis2015');
 var piegis = require('../GisU/piegis');
 var piegis2016 = require('../GisU/piegis2016');
 var piegis2015 = require('../GisU/piegis2015');
 var scattergis = require('../GisU/scattergis');
-var bargis = require('../GisU/bargis');
+var bargis = require('../GisU/bargis');*/
+
 var usr = require('../config/conf2');
 
 /* GET users listening. */
@@ -44,7 +46,8 @@ router.get('/deleteUser', function(req, res, next) {
 router.post('/updateUser', function(req, res, next) {
 	userGis.updateUser(req, res, next);
 });
-router.get('/bar', function(req, res, next) {
+
+/*router.get('/bar', function(req, res, next) {
 	bargis.queryAll(req, res, next);
 });
 router.get('/usa', function(req, res, next) {
@@ -68,7 +71,9 @@ router.get('/pie2015', function(req, res, next) {
 router.get('/scatter', function(req, res, next) {
     console.log("chishishi");
     scattergis.queryAll(req, res, next);
-});
+});*/
+
+
 module.exports = router;
 
 // var express = require('express');
