@@ -46,8 +46,6 @@ html(lang='en')
             #contain(style='width: 100%; height: 100px;')
             #chart2(style='width: 700px; height: 50%;float:left;')
             #chart(style='width: 700px; height: 50%;float:right;')
-            #chart3(style='width: 700px; height: 50%;float:left;')
-            #chart4(style='width: 700px; height: 50%;float:right;')
     // footer
     footer.footer
       .container
@@ -141,7 +139,11 @@ html(lang='en')
             title: {
                 text: '局部墨兰指数与批捕率的关系',
                 subtext: 'By Heymax Xu',
-                left: 'center'
+                left: 'center',
+                textStyle: {
+                color: '#fff',
+                fontSize: 16
+                }
             },
             tooltip: {
                 trigger: 'axis',
@@ -157,6 +159,11 @@ html(lang='en')
                         type: 'dashed'
                     }
                 },
+                 axisLine: {
+                 lineStyle: {
+                 color: '#fff'
+                 }
+                }
             },
             yAxis: {
                 name: '局部墨兰指数',
@@ -166,6 +173,11 @@ html(lang='en')
                         type: 'dashed'
                     }
                 },
+                axisLine: {
+                 lineStyle: {
+                 color: '#fff'
+                 }
+                }
             },
             series: [{
                 name: 'scatter',
@@ -198,7 +210,7 @@ html(lang='en')
                             position: 'left',
                             formatter: myRegression.expression,
                             textStyle: {
-                                color: '#333',
+                                color: '#fff',
                                 fontSize: 14
                             }
                         }
@@ -212,12 +224,18 @@ html(lang='en')
         option2 = {
             title : {
                 text: '数据间相关性分析',
+                textStyle: {
+                color: '#fff'
+                },
                 //subtext: '纯属虚构'
             },
             tooltip : {
                 trigger: 'axis'
             },
             legend: {
+                textStyle: {
+                color: '#fff'
+                },
                 data:['Pearson相关系数','Kendall相关系数','Sperrman相关系数']
             },
             toolbox: {
@@ -235,6 +253,15 @@ html(lang='en')
                 {
                     type : 'category',
                     boundaryGap : false,
+                    axisLine: {
+                    lineStyle: {
+                    color: '#eee'
+                    }
+                    },
+                    axisLabel: {  
+                    interval:0,  
+                    rotate:35  
+                    },
                     data : ['人均GDP','人口密度','贫富差距','消费水平','消耗品支出','恩格尔系数','武器持有量','武器贩卖量','武器持有比','武器贩卖比','人口','恶性伤害案件数','总案件数',
                             '恶性事件占比','GDP'],
                             }
@@ -244,7 +271,12 @@ html(lang='en')
                     type : 'value',
                     axisLabel : {
                         formatter: '{value} '
+                    },
+                    axisLine: {
+                    lineStyle: {
+                    color: '#eee'
                     }
+                    },
                 }
             ],
             series : [
