@@ -2,103 +2,110 @@ doctype html
 html
   head
     title WFS
-    
-    //OPENLAYERS
+    // OPENLAYERS
     link(rel='stylesheet', href='https://openlayers.org/en/v4.6.5/css/ol.css', type='text/css')
     // The line below is only needed for old environments like Internet Explorer and Android 4.x
     script(src='https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL')
     script(src='https://openlayers.org/en/v4.6.5/build/ol.js')
-    
-    //JQUERY
+    // JQUERY
     script(src='/javascripts/jquery.min.js')
-    script(type='text/javascript',src='/javascripts/jquery.js')
+    script(type='text/javascript', src='/javascripts/jquery.js')
     script(src='/javascripts/echarts.js', type='text/javascript')
-
-    //CSS样式
+    // CSS样式
     link(href='/pages/bootstrap/css/bootstrap.min.css', rel='stylesheet')
     link(href='/pages/css/font-awesome.css', rel='stylesheet')
     link(href='/pages/css/ionicons.css', rel='stylesheet')
     link(href='/pages/css/owl.carousel.css', rel='stylesheet')
     link(href='/pages/css/style.css', rel='stylesheet')
-
   body
     #map.map
+    h5 Mousemove position:
     #mouse-position
-    form
-      label Projection 
-      select#projection
-        option(value='EPSG:4326') EPSG:4326
-        option(value='EPSG:3857') EPSG:3857
-      label Precision 
-      input#precision(type='number', min='0', max='12', value='4')
+    h5 Selected position:
+    p#center center: 
     script(src='/pages/js/owl.carousel.js')
     script(src='/pages/js/custom.js')
     script.
       jQuery.noConflict()
-      $.get('/json/ColumbiaPS.json',function(PS){
-        var vectorSourcePS = new ol.source.Vector({
-          features: (new ol.format.GeoJSON()).readFeatures(PS)
-        });
-        var vectorLayerPS = new ol.layer.Vector({
-          source: vectorSourcePS,
-          visible : true,
-        });
-
-
-        var raster = new ol.layer.Tile({
-          source: new ol.source.OSM()
-        });
-        
-        var mousePositionControl = new ol.control.MousePosition({
-          coordinateFormat: ol.coordinate.createStringXY(4),
-          projection: 'EPSG:3857',
-          // comment the following two lines to have the mouse position
-          // be placed within the map.
-          className: 'custom-mouse-position',
-          target: document.getElementById('mouse-position'),
-          undefinedHTML: '&nbsp;'
-        });
-
-        var map = new ol.Map({
-        controls: ol.control.defaults().extend([mousePositionControl]),
-        layers: [raster, vectorLayerPS],
-        target: document.getElementById('map'),
-        view: new ol.View({
-            projection: 'EPSG:4326',
-            center: [114.33, 30.45],
-            zoom: 10
-          })
-        });
-
-        var projectionSelect = document.getElementById('projection');
-        projectionSelect.addEventListener('change', function(event) {
-          mousePositionControl.setProjection(event.target.value);
-        });
-
-        var precisionInput = document.getElementById('precision');
-        precisionInput.addEventListener('change', function(event) {
-          var format = ol.coordinate.createStringXY(event.target.valueAsNumber);
-          mousePositionControl.setCoordinateFormat(format);
-        });
-
+      $.get('/json/ColumbiaPS.json', function(PS) {
+      var vectorSourcePS = new ol.source.Vector({
+      features: (new ol.format.GeoJSON()).readFeatures(PS)
       });
-      //- var vectorSource = new ol.source.Vector({
-      //- format: new ol.format.GeoJSON(),
-      //- url: function(extent) {
-      //- return 'https://ahocevar.com/geoserver/wfs?service=WFS&' +
-      //- 'version=1.1.0&request=GetFeature&typename=osm:water_areas&' +
-      //- 'outputFormat=application/json&srsname=EPSG:3857&' +
-      //- 'bbox=' + extent.join(',') + ',EPSG:3857';
-      //- },
-      //- strategy: ol.loadingstrategy.bbox
-      //- });
-      //- var vector = new ol.layer.Vector({
-      //- source: vectorSource,
-      //- style: new ol.style.Style({
-      //- stroke: new ol.style.Stroke({
-      //- color: 'rgba(0, 0, 255, 1.0)',
-      //- width: 2
-      //- })
-      //- })
-      //- });
-      
+      var vectorLayerPS = new ol.layer.Vector({
+      source: vectorSourcePS,
+      visible: true,
+      });
+      var raster = new ol.layer.Tile({
+      source: new ol.source.OSM()
+      });
+      var mousePositionControl = new ol.control.MousePosition({
+      coordinateFormat: ol.coordinate.createStringXY(4),
+      projection: 'EPSG:4326',
+      className: 'custom-mouse-position',
+      target: document.getElementById('mouse-position'),
+      undefinedHTML: '&nbsp;'
+      });
+
+      //绘图图层
+      var sourceDraw = new ol.source.Vector();
+      var vectorDraw = new ol.layer.Vector({
+        source: sourceDraw,
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.2)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#ffcc33',
+            width: 2
+          }),
+          image: new ol.style.Circle({
+            radius: 7,
+            fill: new ol.style.Fill({
+              color: '#ffcc33'
+            })
+          })
+        })
+      });
+
+
+      var map = new ol.Map({
+      controls: ol.control.defaults().extend([mousePositionControl]),
+      layers: [raster, vectorLayerPS,vectorDraw],
+      target: document.getElementById('map'),
+      view: new ol.View({
+      projection: 'EPSG:4326',
+      center: [282.93, 38.92],
+      zoom: 13
+      })
+      });
+
+      //绘图
+      var modify = new ol.interaction.Modify({source:sourceDraw});
+      map.addInteraction(modify);
+
+      var draw,snap;
+      function addInteractions(){
+        draw = new ol.interaction.Draw({
+          source: sourceDraw,
+          type: "Point",
+        });
+        map.addInteraction(draw);
+        snap = new ol.interaction.Snap({source:sourceDraw});
+        map.addInteraction(snap);
+      };
+
+      function onMoveEnd(evt) {
+      var map = evt.map;
+      var mapview = map.getView();
+      var center = mapview.getCenter();
+      var position = document.getElementById('mouse-position').innerHTML
+      document.getElementById('center').innerHTML = position;
+      sourceDraw.clear();
+      addInteractions();
+      var searchPosition = document.getElementById('center').innerText
+      console.log(searchPosition);
+
+      }
+      map.on('moveend', onMoveEnd);
+      addInteractions();
+      });

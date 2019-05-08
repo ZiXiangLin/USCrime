@@ -466,7 +466,7 @@ html(lang='en')
               var option2 ={
               title: {
                   text: '全美各州枪支持有量',
-                  left: 'center',
+                  x: 'center',
                   textStyle: {
                   color: '#fff'
                   },
@@ -507,7 +507,7 @@ html(lang='en')
               },
               series: [
                   {
-                      name: 'USA PopEstimates',
+                      name: '枪支持有总数',
                       type: 'map',
                       roam: true,
                       map: 'USA',
@@ -518,7 +518,7 @@ html(lang='en')
                       textFixed: {
                           Alaska: [20, -20]
                       },
-                      zoom: 10,
+                      zoom: 1.5,
                       x: 'right',
                       data: data1
                   }
@@ -530,17 +530,6 @@ html(lang='en')
           var chart2 = document.getElementById('chart2');
           var chartData2 = echarts.init(chart2);
           var dataShadow = [];
-              //console.log(result.lawyears);
-              //-   var data1=[];
-              //- for (var i=0, len=result.lawyears.length; i<len; i++){
-              //-   data1.push({
-              //-     name:result.lawyears[i][0],
-              //-     value:result.lawyears[i][28],
-              //-   })
-              //- }
-              //- console.log(data1);
-
-              //datayear=[2,1,6,0,0,3,5,0,6,2,14,1,0,1,2,1,6,0,0,3,5,0,6,2,14,1,0,10];
               var option3={
               title: {
                   text: '该州枪支法律数量1991-2018',
