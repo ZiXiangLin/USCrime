@@ -48,10 +48,10 @@ html(lang='en')
                 button.btn.btn-default.navbar-btn(type='button') Sign in
     .container(style='background-color:rgb(24, 32, 53);width:100%;height:1000px;')
             #contain(style='width: 100%; height: 100px;')
-            #map(style='width: 800px; height: 50%;float:left;')
-            #chart2(style='width: 500px; height: 50%;float:right;')
-            #chart(style='width: 800px; height: 50%;float:left;')
-            #chart3(style='width: 500px; height: 50%;float:right;')
+            #map(style='width: 700px; height: 50%;float:left;')
+            #chart2(style='width: 700px; height: 50%;float:right;')
+            #chart(style='width: 700px; height: 50%;float:left;')
+            #chart3(style='width: 700px; height: 50%;float:right;')
             
     // footer
     footer.footer
@@ -465,8 +465,11 @@ html(lang='en')
               console.log(data1);
               var option2 ={
               title: {
-                  text: 'USA Crime',
-                  left: 'right'
+                  text: '全美各州枪支持有量',
+                  left: 'center',
+                  textStyle: {
+                  color: '#fff'
+                  },
               },
               tooltip: {
                   trigger: 'item',
@@ -480,6 +483,9 @@ html(lang='en')
               },
               visualMap: {
                   left: 'right',
+                  textStyle: {
+                  color: '#fff'
+                  },
                   min:0,
                   max:15000,
                   inRange: {
@@ -512,6 +518,8 @@ html(lang='en')
                       textFixed: {
                           Alaska: [20, -20]
                       },
+                      zoom: 10,
+                      x: 'right',
                       data: data1
                   }
               ]
@@ -536,7 +544,10 @@ html(lang='en')
               var option3={
               title: {
                   text: '该州枪支法律数量1991-2018',
-                  subtext: '点击地图选取州\n Number of firearms laws in state 1991-2018'
+                  subtext: 'Number of firearms laws in state 1991-2018',
+                  textStyle: {
+                  color: '#fff'
+                  },
               },
               tooltip : {
                 trigger: 'axis',
@@ -557,7 +568,7 @@ html(lang='en')
                   },
                   //inside: true,
                   textStyle: {
-                      color: '#555'
+                      color: '#fff'
                   }
                   },
                   //z: 10,
@@ -574,7 +585,7 @@ html(lang='en')
                   },
                   axisLabel: {
                       textStyle: {
-                          color: '#999'
+                          color: '#fff'
                       }
                   }
               },
@@ -628,7 +639,10 @@ html(lang='en')
           var option4={
             title: {
                   text: '2016年某州枪支法种类及数量',
-                  subtext: '点击地图选取州\n Types and Quantities of Firearms Law in a State in 2016',
+                  subtext: 'Types and Quantities of Firearms Law in a State in 2016',
+                  textStyle: {
+                  color: '#fff'
+                  },
                   //subtext: 'Types and Quantities of Firearms Law in a State in 2016'
               },
               xAxis: [{
@@ -641,7 +655,7 @@ html(lang='en')
                   },
                   //inside: true,
                   textStyle: {
-                      color: '#555'
+                      color: '#fff'
                   }
                   },
                   z:50,
@@ -656,7 +670,7 @@ html(lang='en')
                   },
                   axisLabel: {
                       textStyle: {
-                          color: '#999'
+                          color: '#fff'
                       }
                   }
               },
